@@ -1,0 +1,113 @@
+1.Definiciones
+-Poliformismo: es la capacidad de un objeto de tomar diferentes formas. En POO, el polimorfismo se refiere a la habilidad de una clase para tener diferentes implementaciones de un mismo método.
+-Herencia: La herencia en Java implica que una superclase o clase base hereda sus funciones y atributos a una subclase o clase derivada. La palabra reservada que nos permite realizar herencia entre clases es extends. Cabe mencionar que en Java los constructores de las clases no se heredan; sin embargo, pueden ejecutarse en la clase hija con el método super().Considera que las funciones o atributos del tipo private no podrán heredarse.
+-Sobrecarga de métodos:  es uno de los conceptos más clásicos de programación . La sobrecarga hace referencia a un método al cual se le pueden pasar diferentes tipos o números de argumentos.
+-Poliformismo paramétrico: término para referirse a la capacidad de una entidad (como una función, método o tipo de datos) para trabajar de manera genérica con diferentes tipos de parámetros. En otras palabras, el poliformismo paramétrico permite escribir código que puede adaptarse y ser utilizado con diferentes tipos de datos sin tener que reescribirlo para cada tipo específico.
+.Poliformismo de inclusion: es un principio fundamental en la programación orientada a objetos y se refiere a la capacidad de tratar objetos de clases derivadas como objetos de su clase base. En Java, este concepto se implementa a través de la herencia y la implementación de interfaces.
+
+2.Ejemplos de codigo
+-Herencia:
+class Figura {
+    double area() {
+        return 0.0;
+    }
+}
+class Rectangulo extends Figura {
+    double base;
+    double altura;
+    Rectangulo(double base, double altura) {
+        this.base = base;
+        this.altura = altura;
+    }
+    double area() {
+        return base * altura;
+    }
+}
+class Circulo extends Figura {
+    double radio;
+    Circulo(double radio) {
+        this.radio = radio;
+    }
+    double area() {
+        return Math.PI * radio * radio;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Rectangulo rectangulo = new Rectangulo(5, 10);
+        Circulo circulo = new Circulo(3);
+        System.out.println("Área del rectángulo: " + rectangulo.area());
+        System.out.println("Área del círculo: " + circulo.area());
+    }
+}
+-Poliformismo de inclusion:
+class Animal {
+    void hacerSonido() {
+        System.out.println("Sonido genérico de un animal");
+    }
+}
+class Perro extends Animal {
+    void hacerSonido() {
+        System.out.println("Guau guau");
+    }
+}
+class Gato extends Animal {
+    void hacerSonido() {
+        System.out.println("Miau miau");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        // Polimorfismo de inclusión
+        Animal miMascota = new Perro();
+        miMascota.hacerSonido(); 
+        miMascota = new Gato();
+        miMascota.hacerSonido(); 
+    }
+}
+-Sobrecarga
+public class Operaciones {
+    public int sumar(int a, int b) {
+        return a + b;
+    }
+    public int sumar(int a, int b, int c) {
+        return a + b + c;
+    }
+    public String concatenar(String str1, String str2) {
+        return str1 + str2;
+    }
+    public static void main(String[] args) {
+        Operaciones operaciones = new Operaciones();
+        System.out.println("Suma de dos números: " + operaciones.sumar(5, 10));
+        System.out.println("Suma de tres números: " + operaciones.sumar(2, 4, 6));
+        System.out.println("Suma de dos cadenas: " + operaciones.concatenar("Hola, ", "mundo!"));
+    }
+}
+-Poliformismo paramétrico:
+class Contenedor<T> {
+    private T elemento;
+    public Contenedor(T elemento) {
+        this.elemento = elemento;
+    }
+    public T obtenerElemento() {
+        return elemento;
+    }
+    public void setElemento(T elemento) {
+        this.elemento = elemento;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Contenedor<Integer> contenedorEntero = new Contenedor<>(42);
+        System.out.println("Contenido del contenedor de enteros: " + contenedorEntero.obtenerElemento());
+        Contenedor<String> contenedorCadena = new Contenedor<>("Hola, mundo!");
+        System.out.println("Contenido del contenedor de cadenas: " + contenedorCadena.obtenerElemento());
+    }
+}	
+3.-Diferencias entre poliformismo y sobrecarga de métodos
+El polimorfismo se relaciona principalmente con la capacidad de una entidad para tomar varias formas, mientras que la sobrecarga de métodos se refiere a tener múltiples métodos con el mismo nombre en una clase.
+El polimorfismo puede manifestarse de diferentes maneras, como el polimorfismo de inclusión y el polimorfismo paramétrico, mientras que la sobrecarga de métodos se refiere específicamente a tener varios métodos con el mismo nombre.
+El polimorfismo está más estrechamente asociado con la herencia y las relaciones de subclases, mientras que la sobrecarga de métodos se centra en la firma de los métodos (número y tipos de parámetros).
+-Diferencias entre overloading y overriding
+Sobrecarga(overloading): Implica tener múltiples métodos en la misma clase con el mismo nombre pero diferentes parámetros. El método específico que se invoca depende de la lista de argumentos pasados durante la llamada.
+Anulación(overriding): Implica proporcionar una implementación específica de un método que ya está definido en una superclase. El método en la subclase tiene la misma firma que el método en la superclase y se invoca dependiendo del tipo de objeto en tiempo de ejecución.
