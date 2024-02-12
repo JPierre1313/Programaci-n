@@ -35,6 +35,7 @@ class calculadora{
 	} 
 	public double get_preciofinal() {
 		return  ((this.porcentaje*this.precio)) + precio;
+		
 		 
 		
 	}
